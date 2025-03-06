@@ -1,0 +1,77 @@
+@use './iconfont.css';
+@use './wot';
+
+:not(not) {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+page {
+  min-height: 100vh;
+  color: var(--base-text-color);
+}
+
+// text 优先继承父级的颜色
+text {
+  color: inherit;
+}
+
+.iconfont {
+  color: inherit;
+}
+
+:root,
+page {
+  // 修改按主题色
+  --wot-color-theme: #2aae67;
+  // 背景色
+  --wot-bg-color: #d4fbe6;
+
+  // 修改按钮背景色
+  // --wot-button-primary-bg-color: green;
+  --base-padding: 20rpx;
+  --base-page-padding: 40rpx;
+  // border-radius
+  --base-radius: 16rpx;
+  --base-text-color-gray: #b1b1b1;
+  // 字体大小
+  --base-font-size: 32rpx;
+  --base-font-size-sm: 24rpx;
+  // margin
+  --base-margin-big: 40rpx;
+  --base-margin: 20rpx;
+  --base-margin-sm: 10rpx;
+
+  // 渐变
+  --base-gradient-to-right: linear-gradient(to right, #2aae67, #8cb09d);
+  --base-gradient-to-left: linear-gradient(to left, #2aae67, #8cb09d);
+}
+
+// 浅色模式
+.wot-theme-light {
+  --base-color: #ffffff;
+  --base-color-orange: #fefaf4;
+  --base-hover-color: #f5f5f5;
+  --base-text-color: #333;
+  --base-border-color: #ebebeb;
+  --base-shadow-color: rgba(0, 0, 0, 0.1);
+  --base-bg-color: #f2f9f5;
+
+  color: #333;
+  background: linear-gradient(to bottom, #ddfceb, #f1f8f5 12%, #fff);
+}
+
+// 黑夜模式
+.wot-theme-dark {
+  --base-color: #333;
+  --base-color-orange: #232221;
+  --base-hover-color: #595959;
+  --base-text-color: #fff;
+  --base-border-color: #595959;
+  --base-shadow-color: rgba(255, 255, 255, 0.1);
+  --base-bg-color: #1f2322;
+
+  color: #f5f5f5;
+  background: linear-gradient(to bottom, #000000, #000000, #301b02 98%);
+}

@@ -1,0 +1,13 @@
+.wd-navbar__left--hover {
+  background: transparent !important;
+}
+
+.wd-cell__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .wd-cell__body {
+    display: flex;
+    align-items: center;
+  }
+}
