@@ -110,6 +110,15 @@ defineExpose({
         <template v-if="$slots.navbarLeft" #left>
           <slot name="navbarLeft"></slot>
         </template>
+        <!-- 中间插槽 -->
+        <template v-if="$slots.navbarTitle" #title>
+          <slot name="navbarTitle"></slot>
+        </template>
+
+        <!-- 右侧内容 -->
+        <template v-if="$slots.navbarRight" #right>
+          <slot name="navbarRight"></slot>
+        </template>
       </wd-navbar>
       <slot />
     </scroll-view>
