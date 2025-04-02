@@ -26,6 +26,8 @@ const emits = defineEmits<{
 const isTop = ref(true)
 /** 最后一次滚动的top值 */
 const lastScrollTop = ref(0)
+const pages = getCurrentPages()
+
 const themeVars = computed((): ConfigProviderThemeVars => {
   return appStore.isDark ? {} : {}
 })
@@ -63,7 +65,6 @@ const scrollToUpper = () => {
 /** 点击navbar左侧按钮 */
 const navBarClickLeft = () => {
   if (props.defaultClickLeft) {
-    const pages = getCurrentPages()
     if (pages.length > 1) {
       uni.navigateBack()
     } else {
@@ -107,9 +108,17 @@ defineExpose({
         v-bind="navbarConfig"
         @click-left="navBarClickLeft"
       >
+        <!-- 左侧插槽 -->
         <template v-if="$slots.navbarLeft" #left>
           <slot name="navbarLeft"></slot>
         </template>
+        <template v-else-if="defaultClickLeft" #left>
+          <wd-icon :name="pages.length > 1 ? 'arrow-left' : 'home'" size="44rpx"></wd-icon>
+        </template>
+        <template v-else #left>
+          <image class="logo" src="@/static/logo.png" />
+        </template>
+
         <!-- 中间插槽 -->
         <template v-if="$slots.navbarTitle" #title>
           <slot name="navbarTitle"></slot>
@@ -142,6 +151,12 @@ defineExpose({
 .default-layout {
   width: 100%;
   height: 100vh;
+
+  .logo {
+    flex-shrink: 0;
+    width: 52rpx;
+    height: 52rpx;
+  }
 
   &:deep(::-webkit-scrollbar) {
     display: block;
