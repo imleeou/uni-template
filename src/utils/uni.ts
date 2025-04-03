@@ -88,17 +88,32 @@ export function getSystemInfo(useCache = true) {
   })
 }
 
+/** 获取状态栏高度 */
+export async function getStatusBarHeight() {
+  const { statusBarHeight } = await getSystemInfo()
+  return statusBarHeight
+}
+
+/** 获取胶囊区域高度， 胶囊高度 + 上下间距 */
+export async function getCapsuleBarHeight() {
+  const systemInfo = await getSystemInfo()
+  // 获取手机顶部状态栏的高度
+  const statusBarHeight = systemInfo.statusBarHeight || 0
+  const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
+  const navBarHeight = menuButtonInfo.height + (menuButtonInfo.top - statusBarHeight) * 2
+  // 获取导航栏的高度（手机状态栏高度 + 胶囊高度 + 胶囊的上下间距）
+  return navBarHeight
+}
+
 /** 获取导航栏 + 状态栏高度 */
 export async function getNavigationBarHeight() {
   const systemInfo = await getSystemInfo()
   console.log(`💡 ~ getNavigationBarHeight ~ systemInfo -> `, systemInfo)
   // 获取手机顶部状态栏的高度
   const statusBarHeight = systemInfo.statusBarHeight || 0
-
   // 获取导航栏的高度（手机状态栏高度 + 胶囊高度 + 胶囊的上下间距）
   const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
   console.log(`💡 ~ getNavigationBarHeight ~ menuButtonInfo -> `, menuButtonInfo)
   const navBarHeight = menuButtonInfo.height + (menuButtonInfo.top - statusBarHeight) * 2
-
   return navBarHeight + statusBarHeight
 }
